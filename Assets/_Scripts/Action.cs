@@ -12,8 +12,8 @@ public class Action : MonoBehaviour
     public bool interaction = false;
     public bool destroyMe = false;
     public float destroyTimer;
-    public Material[] normalMats;
-    public Material[] interactMats;
+    public Sprite[] normalSprite;
+    public Sprite[] interactSprite;
 
     void Update()
     {
@@ -57,10 +57,14 @@ public class Action : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag.Equals("Trigger"))
+        if (!destroyMe)
         {
-            ChangeRender(0);
-            destroyMe = true;
+            if (collision.gameObject.tag.Equals("Trigger"))
+            {
+                ChangeRender(0);
+                destroyMe = true;
+                GetComponent<Rigidbody2D>().gravityScale = Random.Range(1.5f, 3);
+            }
         }
     }
 
@@ -87,10 +91,19 @@ public class Action : MonoBehaviour
     {
         if (interaction)
         {
-            GetComponent<Renderer>().sharedMaterial = interactMats[index];
+            GetComponent<SpriteRenderer>().sprite = interactSprite[index];
         } else
         {
-            GetComponent<Renderer>().sharedMaterial = normalMats[index];
+            GetComponent<SpriteRenderer>().sprite = normalSprite[index];
         }
+    }
+
+    public void HitAction()
+    {
+        ChangeRender(1);
+        destroyMe = true;
+        Destroy(GetComponent<Collider2D>());
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        GetComponent<Rigidbody2D>().gravityScale = Random.Range(-0.5f, -0.25f);
     }
 }

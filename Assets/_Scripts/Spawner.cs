@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour
         }
         if (Random.Range(0, 100) + mod > spawnChance)
         {
-            int index = Random.Range(0, 2);
+            int index = Random.Range(0, actions.Length);
             GameObject action = Instantiate(actions[index], spawnpoint);
             action.GetComponent<Action>().onFireFinish = end;
             action.GetComponent<Action>().Spawn(direction, speed);
