@@ -90,6 +90,7 @@ public class MasterSpawner : MonoBehaviour
                 }
                 else if (interactionReady)
                 {
+                    interactionReady = false;
                     SpawnInteraction();
                 }
                 else
@@ -187,8 +188,6 @@ public class MasterSpawner : MonoBehaviour
 
         topSpawner.SpawnInteraction(a1);
         bottomSpawner.SpawnInteraction(a2);
-
-        interactionReady = false;
     }
 
     public void InteractionWhenReady()
@@ -199,17 +198,17 @@ public class MasterSpawner : MonoBehaviour
     //TODO remove me when interaction is handeld somewhere more intelligent!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     void InteractionDummySpawner(float deltaTime)
     {
-        if (!interactionReady)
+        if (interactionTimer <= 0)
         {
-            if (interactionTimer <= 0)
+            if (!interactionReady)
             {
                 InteractionWhenReady();
             }
 
-            interactionTimer -= deltaTime;
+            interactionTimer = interactionInterval;
         } else
         {
-            interactionTimer = interactionInterval;
+            interactionTimer -= deltaTime;
         }
     }
 }

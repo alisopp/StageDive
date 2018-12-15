@@ -12,8 +12,8 @@ public class Action : MonoBehaviour
     public bool interaction = false;
     public bool destroyMe = false;
     public float destroyTimer;
-    public Material[] normalMats;
-    public Material[] interactMats;
+    public Sprite[] normalSprite;
+    public Sprite[] interactSprite;
 
     void Update()
     {
@@ -61,6 +61,7 @@ public class Action : MonoBehaviour
         {
             ChangeRender(0);
             destroyMe = true;
+            GetComponent<Rigidbody2D>().gravityScale = Random.Range(-3,-1);
         }
     }
 
@@ -87,10 +88,10 @@ public class Action : MonoBehaviour
     {
         if (interaction)
         {
-            GetComponent<Renderer>().sharedMaterial = interactMats[index];
+            GetComponent<SpriteRenderer>().sprite = interactSprite[index];
         } else
         {
-            GetComponent<Renderer>().sharedMaterial = normalMats[index];
+            GetComponent<SpriteRenderer>().sprite = normalSprite[index];
         }
     }
 }

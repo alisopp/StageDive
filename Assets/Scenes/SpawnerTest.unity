@@ -151,7 +151,9 @@ MonoBehaviour:
   - {fileID: 2071739423}
   direction: 1
   speed: 1
-  spanChance: 49
+  spawnChance: 0
+  spawnModMin: 0
+  spawnModMax: 0
 --- !u!4 &431564040
 Transform:
   m_ObjectHideFlags: 0
@@ -684,7 +686,9 @@ MonoBehaviour:
   - {fileID: 2071739423}
   direction: 1
   speed: 1
-  spanChance: 49
+  spawnChance: 0
+  spawnModMin: 0
+  spawnModMax: 0
 --- !u!4 &2029921354
 Transform:
   m_ObjectHideFlags: 0
