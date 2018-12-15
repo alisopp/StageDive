@@ -35,16 +35,13 @@ public class Action : MonoBehaviour
         this.GetComponent<Rigidbody2D>().velocity = new Vector2(this.speed * this.direction, 0);
     }
 
-    public void SetSpeed(int speed)
+    public void SetSpeed(float speed)
     {
-        this.speed = speed;
-        this.GetComponent<Rigidbody2D>().velocity = new Vector2(this.speed*direction,0);
-    }
-
-    //TODO make action change colore
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        
+        if (!destroyMe)
+        {
+            this.speed = speed;
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(this.speed * direction, 0);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -64,6 +61,7 @@ public class Action : MonoBehaviour
                 ChangeRender(0);
                 destroyMe = true;
                 GetComponent<Rigidbody2D>().gravityScale = Random.Range(1.5f, 3);
+                transform.parent.transform.parent.transform.parent.GetComponent<Player>().MissHit(1);
             }
         }
     }
@@ -104,6 +102,6 @@ public class Action : MonoBehaviour
         destroyMe = true;
         Destroy(GetComponent<Collider2D>());
         GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
-        GetComponent<Rigidbody2D>().gravityScale = Random.Range(-0.5f, -0.25f);
+        GetComponent<Rigidbody2D>().gravityScale = Random.Range(-2.5f, -2.25f);
     }
 }
