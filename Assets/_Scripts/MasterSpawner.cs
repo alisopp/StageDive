@@ -78,6 +78,7 @@ public class MasterSpawner : MonoBehaviour
                 {
                     SpawnAction();
 
+                    //TODO check this out later
                     if (fireTimer < -fireDelay)
                     {
                         EndOnFire();

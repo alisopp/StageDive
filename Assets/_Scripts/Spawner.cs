@@ -8,7 +8,9 @@ public class Spawner : MonoBehaviour
     public GameObject[] actions;
     public int direction;
     public float speed;
-    public int spanChance;
+    public int spawnChance;
+    public int spawnModMin;
+    public int spawnModMax;
     bool hasMissedLast = false;
     int mod = 0;
 
@@ -16,12 +18,12 @@ public class Spawner : MonoBehaviour
     {
         if (hasMissedLast)
         {
-            mod += Random.Range(1, 5);
+            mod += Random.Range(spawnModMin, spawnModMax);
         } else
         {
             mod = 0;
         }
-        if (Random.Range(0, 100) + mod > spanChance)
+        if (Random.Range(0, 100) + mod > spawnChance)
         {
             int index = Random.Range(0, 2);
             GameObject action = Instantiate(actions[index], spawnpoint);
