@@ -57,11 +57,14 @@ public class Action : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag.Equals("Trigger"))
+        if (!destroyMe)
         {
-            ChangeRender(0);
-            destroyMe = true;
-            GetComponent<Rigidbody2D>().gravityScale = Random.Range(-3,-1);
+            if (collision.gameObject.tag.Equals("Trigger"))
+            {
+                ChangeRender(0);
+                destroyMe = true;
+                GetComponent<Rigidbody2D>().gravityScale = Random.Range(1.5f, 3);
+            }
         }
     }
 
@@ -93,5 +96,14 @@ public class Action : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = normalSprite[index];
         }
+    }
+
+    public void HitAction()
+    {
+        ChangeRender(1);
+        destroyMe = true;
+        Destroy(GetComponent<Collider2D>());
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        GetComponent<Rigidbody2D>().gravityScale = Random.Range(-0.5f, -0.25f);
     }
 }

@@ -7,6 +7,9 @@ TagManager:
   - Trigger
   - Action
   - UP
+  - LEFT
+  - RIGHT
+  - DOWN
   layers:
   - Default
   - TransparentFX

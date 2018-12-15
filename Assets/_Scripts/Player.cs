@@ -28,43 +28,99 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameObject top;
+        if (topTrigger.triggered == null)
+        {
+            top = this.gameObject;
+        }
+        else
+        {
+            top = topTrigger.triggered;
+        }
+
+        GameObject bottom;
+        if (bottomTrigger.triggered == null)
+        {
+            bottom = this.gameObject;
+        }
+        else
+        {
+            bottom = bottomTrigger.triggered;
+        }
+
         if (Input.GetKeyDown(UP))
         {
-            if (topTrigger.tag.Equals("UP") || bottomTrigger.tag.Equals("UP"))
+            if (top.tag.Equals("UP") || bottom.tag.Equals("UP"))
             {
                 UpdateCombo(true);
-            } else
+                if (top.tag.Equals("UP"))
+                {
+                    UpdateScore(top);
+                }
+                if (bottom.tag.Equals("UP"))
+                {
+                    UpdateScore(bottom);
+                }
+            }
+            else
             {
                 UpdateCombo(false);
             }
         }
+
         if (Input.GetKeyDown(LEFT))
         {
-            if (topTrigger.tag.Equals("LEFT") || bottomTrigger.tag.Equals("LEFT"))
+            if (top.tag.Equals("LEFT") || bottom.tag.Equals("LEFT"))
             {
                 UpdateCombo(true);
+                if (top.tag.Equals("LEFT"))
+                {
+                    UpdateScore(top);
+                }
+                if (bottom.tag.Equals("LEFT"))
+                {
+                    UpdateScore(bottom);
+                }
             }
             else
             {
                 UpdateCombo(false);
             }
         }
+
         if (Input.GetKeyDown(RIGHT))
         {
-            if (topTrigger.tag.Equals("RIGHT") || bottomTrigger.tag.Equals("RIGHT"))
+            if (top.tag.Equals("RIGHT") || bottom.tag.Equals("RIGHT"))
             {
                 UpdateCombo(true);
+                if (top.tag.Equals("RIGHT"))
+                {
+                    UpdateScore(top);
+                }
+                if (bottom.tag.Equals("RIGHT"))
+                {
+                    UpdateScore(bottom);
+                }
             }
             else
             {
                 UpdateCombo(false);
             }
         }
+
         if (Input.GetKeyDown(DOWN))
         {
-            if (topTrigger.tag.Equals("DOWN") || bottomTrigger.tag.Equals("DOWN"))
+            if (top.tag.Equals("DOWN") || bottom.tag.Equals("DOWN"))
             {
                 UpdateCombo(true);
+                if (top.tag.Equals("DOWN"))
+                {
+                    UpdateScore(top);
+                }
+                if (bottom.tag.Equals("DOWN"))
+                {
+                    UpdateScore(bottom);
+                }
             }
             else
             {
@@ -90,5 +146,10 @@ public class Player : MonoBehaviour
             }
             comboLvL -= 0.1f;
         }
+    }
+
+    void UpdateScore(GameObject action)
+    {
+        action.GetComponent<Action>().HitAction();
     }
 }

@@ -179,8 +179,8 @@ public class MasterSpawner : MonoBehaviour
 
     void SpawnInteraction()
     {
-        int a1 = Random.Range(0, 2);
-        int a2 = Random.Range(0, 2);
+        int a1 = Random.Range(0, 3);
+        int a2 = Random.Range(0, 3);
         if (a1 == a2)
         {
             a2 = (a2 + 1) % 3;
