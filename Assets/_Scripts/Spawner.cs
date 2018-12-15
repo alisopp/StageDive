@@ -8,21 +8,36 @@ public class Spawner : MonoBehaviour
     public GameObject[] actions;
     public int direction;
     public float speed;
+    public int spanChance;
+    bool hasMissedLast = false;
+    int mod = 0;
 
     public void SpawnRandomAction(bool end)
     {
-        int index = Random.Range(0, 2);
-        GameObject action = Instantiate(actions[index], spawnpoint);
-        action.GetComponent<Action>().Spawn(direction);
-        action.GetComponent<Action>().speed = this.speed;
-        action.GetComponent<Action>().onFireFinish = end;
+        if (hasMissedLast)
+        {
+            mod += Random.Range(1, 5);
+        } else
+        {
+            mod = 0;
+        }
+        if (Random.Range(0, 100) + mod > spanChance)
+        {
+            int index = Random.Range(0, 2);
+            GameObject action = Instantiate(actions[index], spawnpoint);
+            action.GetComponent<Action>().Spawn(direction, speed);
+            action.GetComponent<Action>().onFireFinish = end;
+            hasMissedLast = false;
+        } else
+        {
+            hasMissedLast = true;
+        }
     }
 
     public void SpawnInteraction(int index)
     {
         GameObject action = Instantiate(actions[index], spawnpoint);
-        action.GetComponent<Action>().Spawn(direction);
-        action.GetComponent<Action>().speed = this.speed;
+        action.GetComponent<Action>().Spawn(direction,speed);
         action.GetComponent<Action>().interaction = true;
     }
 

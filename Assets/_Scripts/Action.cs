@@ -8,10 +8,26 @@ public class Action : MonoBehaviour
     public float speed;
     public bool onFireFinish = false;
     public bool interaction = false;
+    public bool destroyMe = false;
+    public float destroyTimer;
 
-    public void Spawn(int direction)
+    void Update()
+    {
+        if (destroyMe)
+        {
+            if (destroyTimer <= 0)
+            {
+                DestroyMe();
+            }
+            destroyTimer -= Time.deltaTime;
+        }
+    }
+
+        public void Spawn(int direction, float speed)
     {
         this.direction = direction;
+        this.speed = speed;
+        this.GetComponent<Rigidbody2D>().velocity = new Vector2(this.speed * this.direction, 0);
     }
 
     public void SetSpeed(int speed)
@@ -21,5 +37,27 @@ public class Action : MonoBehaviour
     }
 
     //TODO make action change colore
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Trigger"))
+        {
+            destroyMe = true;
+        }
+    }
+
+    void DestroyMe()
+    {
+        //TODO fancy animationes
+        Destroy(this.gameObject);
+    }
 }

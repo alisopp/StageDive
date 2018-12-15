@@ -49,6 +49,7 @@ public class MasterSpawner : MonoBehaviour
     {
         if (spawning)
         {
+            float timeFrame = Time.deltaTime;
             if (actionTimer <= 0)
             {
                 if (onFire)
@@ -69,7 +70,7 @@ public class MasterSpawner : MonoBehaviour
                     }
                     else
                     {
-                        fireTimer -= Time.deltaTime;
+                        fireTimer -= timeFrame;
                     }
                 }
                 else if (fireIsOn)
@@ -82,7 +83,7 @@ public class MasterSpawner : MonoBehaviour
                     }
                     else
                     {
-                        fireTimer -= Time.deltaTime;
+                        fireTimer -= timeFrame;
                     }
                 }
                 else if (interactionTimer <= 0)
@@ -104,12 +105,9 @@ public class MasterSpawner : MonoBehaviour
                 }
 
             }
-            else
-            {
-                actionTimer -= Time.deltaTime;
-            }
-
-            interactionTimer -= Time.deltaTime;
+            
+            actionTimer -= timeFrame;
+            interactionTimer -= timeFrame;
         }
     }
 
