@@ -7,7 +7,7 @@ public class MasterSpawner : MonoBehaviour
     //Controll
     public bool spawning; //if game is on
     float actionTimer;
-    float interactionTimer;
+    bool interactionReady = false;
     float fireTimer;
     public float spawnLimiter;
     public float speed;
@@ -25,6 +25,7 @@ public class MasterSpawner : MonoBehaviour
     public float crowdMod;
 
     //Spawn Interactions
+    float interactionTimer;
     public float interactionInterval;
 
     //Spawn ONFIRE
@@ -86,7 +87,7 @@ public class MasterSpawner : MonoBehaviour
                         fireTimer -= timeFrame;
                     }
                 }
-                else if (interactionTimer <= 0)
+                else if (interactionReady)
                 {
                     SpawnInteraction();
                 }
@@ -107,7 +108,7 @@ public class MasterSpawner : MonoBehaviour
             }
             
             actionTimer -= timeFrame;
-            interactionTimer -= timeFrame;
+            InteractionDummySpawner(timeFrame);
         }
     }
 
@@ -186,6 +187,27 @@ public class MasterSpawner : MonoBehaviour
         topSpawner.SpawnInteraction(a1);
         bottomSpawner.SpawnInteraction(a2);
 
-        interactionTimer = interactionInterval;
+        interactionReady = false;
+    }
+
+    public void InteractionWhenReady()
+    {
+        interactionReady = true;
+    }
+
+    void InteractionDummySpawner(float deltaTime)
+    {
+        if (!interactionReady)
+        {
+            if (interactionTimer <= 0)
+            {
+                InteractionWhenReady();
+            }
+
+            interactionTimer -= deltaTime;
+        } else
+        {
+            interactionTimer = interactionInterval;
+        }
     }
 }
