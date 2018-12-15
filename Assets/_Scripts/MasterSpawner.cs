@@ -77,16 +77,6 @@ public class MasterSpawner : MonoBehaviour
                 else if (fireIsOn)
                 {
                     SpawnAction();
-
-                    //TODO check this out later
-                    if (fireTimer < -fireDelay)
-                    {
-                        EndOnFire();
-                    }
-                    else
-                    {
-                        fireTimer -= timeFrame;
-                    }
                 }
                 else if (interactionReady)
                 {
@@ -110,7 +100,6 @@ public class MasterSpawner : MonoBehaviour
             }
             
             actionTimer -= timeFrame;
-            InteractionDummySpawner(timeFrame);
         }
     }
 
@@ -193,22 +182,5 @@ public class MasterSpawner : MonoBehaviour
     public void InteractionWhenReady()
     {
         interactionReady = true;
-    }
-
-    //TODO remove me when interaction is handeld somewhere more intelligent!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    void InteractionDummySpawner(float deltaTime)
-    {
-        if (interactionTimer <= 0)
-        {
-            if (!interactionReady)
-            {
-                InteractionWhenReady();
-            }
-
-            interactionTimer = interactionInterval;
-        } else
-        {
-            interactionTimer -= deltaTime;
-        }
     }
 }

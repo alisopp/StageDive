@@ -12,12 +12,16 @@ public class Player : MonoBehaviour
     public KeyCode COMBO;
 
     //Variables
+    public GameController gc;
     public MasterSpawner ms;
     public Trigger topTrigger;
     public Trigger bottomTrigger;
+    public int score = 0;
     public float comboLvL = 0;
-    public float crowdLvL = 0;
-    public int speed = 5;
+    public int crowdLvL = 0;
+    public float speed = 5;
+    public int timeMod = 1;
+    int missed = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +32,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(COMBO))
+        {
+            if (!ms.onFire) gc.OnFire(this);
+        }
+
         GameObject top;
         if (topTrigger.triggered == null)
         {
@@ -137,19 +146,117 @@ public class Player : MonoBehaviour
             {
                 comboLvL = 0;
             }
-            comboLvL += 0.1f;
-        } else
+            else
+            {
+                comboLvL += 0.1f;
+                comboLvL = Mathf.Min(comboLvL, 5);
+            }
+            missed = 0;
+        }
+        else
         {
             if (comboLvL > 0)
             {
-                comboLvL = 0;
+                if (missed >= 2)
+                {
+                    comboLvL = 0;
+                    missed = 0;
+                }
+                else
+                {
+                    comboLvL = comboLvL * 0.75f;
+                    missed++;
+                }
             }
-            comboLvL -= 0.1f;
+            else
+            {
+                comboLvL -= 0.1f;
+                comboLvL = Mathf.Max(comboLvL, -5);
+            }
+            MissHit(2);
+        }
+        if (ms.comboLvL != (int)comboLvL)
+        {
+            UpdateLvLs(crowdLvL);
         }
     }
 
     void UpdateScore(GameObject action)
     {
-        action.GetComponent<Action>().HitAction();
+        Action a = action.GetComponent<Action>();
+        int points = 1;
+        if (a.perfect) points += points;
+        points *= (1+(int)comboLvL);
+
+        points *= timeMod;
+
+        score += points;
+
+        if (a.onFireFinish)
+        {
+            if (comboLvL > 2 && crowdLvL > 0)
+            {
+                gc.EndGame();
+            } else if (comboLvL > 2)
+            {
+                score += 200;
+            }
+            gc.CoolDown(this);
+        }
+
+        a.HitAction();
+    }
+
+    public void MissHit(int points)
+    {
+        points = points * (1+(int)comboLvL);
+
+        points *= timeMod;
+
+        score -= points;
+
+        if (ms.onFire)
+        {
+            gc.CoolDown(this);
+            if (crowdLvL > 0) score -= 100;
+        }
+    }
+
+    public void InteractionTime()
+    {
+        ms.InteractionWhenReady();
+    }
+
+    public void UpdateLvLs(int crowdLvl)
+    {
+        crowdLvL = crowdLvl;
+        speed = 5 + ((crowdLvL + comboLvL)/2);
+
+        ms.speed = speed;
+        ms.comboLvL = (int)comboLvL;
+        ms.crowdLvL = crowdLvL;
+        SetSpeeds();
+    }
+
+    void SetSpeeds()
+    {
+        foreach(Action a in ms.topSpawner.GetComponentsInChildren<Action>())
+        {
+            a.SetSpeed(speed);
+        }
+        foreach (Action a in ms.bottomSpawner.GetComponentsInChildren<Action>())
+        {
+            a.SetSpeed(speed);
+        }
+    }
+
+    public void OnFire(bool fire)
+    {
+        ms.OnFire(fire);
+    }
+
+    public void CoolDown()
+    {
+        ms.EndOnFire();
     }
 }
