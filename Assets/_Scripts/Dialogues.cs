@@ -1,4 +1,24 @@
-string[] positiveDialogues = new string[] {
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Dialogues
+{
+    public static string GetDialogue(bool isGood)
+    {
+        if(isGood)
+        {
+            return positiveDialogues[Random.Range(0, positiveDialogues.Length)];
+        }
+        else
+        {
+            return negativeDialogues[Random.Range(0, negativeDialogues.Length)];
+        }
+    }
+
+
+
+    private static string[] positiveDialogues = new string[] {
         "This city rocks!",
 "You are such a good crowd!",
 "Your city is beautiful <3",
@@ -69,7 +89,7 @@ string[] positiveDialogues = new string[] {
 "Put your hands up in the air as if you dont care!!",
     };
 
-    string[] negativeDialogues = new string[] {
+    private static string[] negativeDialogues = new string[] {
         "Crowd surfing is not prohibited",
 "Free shots for me only",
 "Nobody likes encores anyway, right ?",
@@ -136,3 +156,4 @@ string[] positiveDialogues = new string[] {
 "People are shit",
 "Don't choose this one"
     };
+}
