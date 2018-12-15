@@ -6,7 +6,8 @@ public class InteractionHandler : MonoBehaviour
 {
     private static InteractionHandler instance;
 
-
+    [SerializeField]
+    private GameController gameController;
     [SerializeField]
     private int decisionFieldAliveTime;
     [SerializeField]
@@ -43,6 +44,8 @@ public class InteractionHandler : MonoBehaviour
         }
     }
 
+
+
     public int DecisionFieldAliveTime
     {
         get
@@ -53,6 +56,19 @@ public class InteractionHandler : MonoBehaviour
         set
         {
             decisionFieldAliveTime = value;
+        }
+    }
+
+    public GameController GameController
+    {
+        get
+        {
+            return gameController;
+        }
+
+        set
+        {
+            gameController = value;
         }
     }
 
@@ -151,5 +167,6 @@ public class InteractionHandler : MonoBehaviour
         {
             Debug.Log("Message is: " + isUpperAGoodInteraction.ToString());
         }
+        gameController.SpawnInteraction(isUpperAGoodInteraction);
     }
 }

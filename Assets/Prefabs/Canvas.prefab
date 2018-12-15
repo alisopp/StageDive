@@ -132,8 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menus:
   - {fileID: 2538368612402577488}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2538368612402577492}
+  - {fileID: 2538368612402577494}
   currentMenuIndex: 0
 --- !u!1 &782212912166806048
 GameObject:
@@ -305,7 +305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2078331568972271751
 RectTransform:
   m_ObjectHideFlags: 0
@@ -656,7 +656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4047453175881447743
 RectTransform:
   m_ObjectHideFlags: 0
