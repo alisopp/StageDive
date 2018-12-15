@@ -25,8 +25,8 @@ public class Spawner : MonoBehaviour
         {
             int index = Random.Range(0, 2);
             GameObject action = Instantiate(actions[index], spawnpoint);
-            action.GetComponent<Action>().Spawn(direction, speed);
             action.GetComponent<Action>().onFireFinish = end;
+            action.GetComponent<Action>().Spawn(direction, speed);
             hasMissedLast = false;
         } else
         {
@@ -37,8 +37,8 @@ public class Spawner : MonoBehaviour
     public void SpawnInteraction(int index)
     {
         GameObject action = Instantiate(actions[index], spawnpoint);
-        action.GetComponent<Action>().Spawn(direction,speed);
         action.GetComponent<Action>().interaction = true;
+        action.GetComponent<Action>().Spawn(direction,speed);
     }
 
     public void SetSpeed(float speed)

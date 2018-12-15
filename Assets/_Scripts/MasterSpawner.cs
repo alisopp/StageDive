@@ -195,6 +195,7 @@ public class MasterSpawner : MonoBehaviour
         interactionReady = true;
     }
 
+    //TODO remove me when interaction is handeld somewhere more intelligent!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     void InteractionDummySpawner(float deltaTime)
     {
         if (!interactionReady)

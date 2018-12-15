@@ -263,7 +263,7 @@ MonoBehaviour:
   comboMod: 0
   crowdLvL: 0
   crowdMod: 0
-  interactionInterval: 100000
+  interactionInterval: 1
   onFire: 0
   fireIsOn: 0
   onFireMod: 0
@@ -807,6 +807,7 @@ MonoBehaviour:
   interaction: 0
   destroyMe: 0
   destroyTimer: 1
+  normalMats: []
 --- !u!61 &2071739429
 BoxCollider2D:
   m_ObjectHideFlags: 0
