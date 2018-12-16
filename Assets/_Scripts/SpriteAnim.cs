@@ -14,10 +14,12 @@ public class SpriteAnim : MonoBehaviour
     bool end = false;
     bool start = false;
     private Animator animator;
+    private bool onFire;
 
 
     public void Start()
     {
+        onFire = false;
         animator = GetComponent<Animator>();
     }
 
@@ -32,12 +34,14 @@ public class SpriteAnim : MonoBehaviour
         if (ms.spawning || !start)
         {
             //this.GetComponent<SpriteRenderer>().sprite = sprites[actFrame++];
-            if (ms.onFire)
+            if (ms.onFire && !onFire)
             {
+                onFire = true;
                 Debug.Log(" I am on Fire");
                 animator.SetBool("Hype", true);
-            }else if(!ms.onFire)
+            }else if(!ms.onFire && onFire)
             {
+                onFire = false;
                 Debug.Log("Not anymore on Fire");
                 animator.SetBool("Hype", false);
             }

@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour
     bool fire = false;
     bool onFire = false;
     public bool running = false;
-
+    private bool gamesEnd = false;
 
     private float crowdYPosition;
 
@@ -32,12 +32,14 @@ public class GameController : MonoBehaviour
     {
         crowdYPosition = crowd.transform.localPosition.y;
         interactionHandler.GameController = this;
+        menuManager.SwitchMenu(0);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && !running) StartGame();
+        if (Input.GetKeyDown(KeyCode.Space) && gamesEnd) ResetGame();
         if (!running) return;
 
         HandleCrowd(playerL.score, playerR.score);
@@ -74,6 +76,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void ResetGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
     void StartGame()
     {
         playerL.end = false;
@@ -91,6 +98,8 @@ public class GameController : MonoBehaviour
         playerL.ms.spawning = false;
         playerR.end = true;
         playerR.ms.spawning = false;
+        gamesEnd = true;
+        interactionHandler.StopInteractionHandler();
         menuManager.SwitchMenu(1);
     }
 
