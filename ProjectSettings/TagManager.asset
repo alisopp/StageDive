@@ -10,6 +10,8 @@ TagManager:
   - LEFT
   - RIGHT
   - DOWN
+  - Top
+  - Bottom
   layers:
   - Default
   - TransparentFX
