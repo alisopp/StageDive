@@ -91,6 +91,7 @@ public class GameController : MonoBehaviour
         playerL.ms.spawning = false;
         playerR.end = true;
         playerR.ms.spawning = false;
+        menuManager.SwitchMenu(1);
     }
 
     void HandleCrowd(int pL, int pR)

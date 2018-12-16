@@ -13,10 +13,12 @@ public class Menu : MonoBehaviour
     public void Disabe()
     {
         gameObject.SetActive(false);
+        onDisable.Invoke();
     }
 
     public void Enable()
     {
         gameObject.SetActive(true);
+        onEnable.Invoke();
     }
 }
