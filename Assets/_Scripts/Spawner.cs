@@ -19,18 +19,20 @@ public class Spawner : MonoBehaviour
         if (hasMissedLast)
         {
             mod += Random.Range(spawnModMin, spawnModMax);
-        } else
+        }
+        else
         {
             mod = 0;
         }
-        if (Random.Range(0, 100) + mod > spawnChance)
+        if (Random.Range(0, 100) + mod > spawnChance || end)
         {
             int index = Random.Range(0, actions.Length);
             GameObject action = Instantiate(actions[index], spawnpoint);
             action.GetComponent<Action>().onFireFinish = end;
             action.GetComponent<Action>().Spawn(direction, speed);
             hasMissedLast = false;
-        } else
+        }
+        else
         {
             hasMissedLast = true;
         }
@@ -40,7 +42,7 @@ public class Spawner : MonoBehaviour
     {
         GameObject action = Instantiate(actions[index], spawnpoint);
         action.GetComponent<Action>().interaction = true;
-        action.GetComponent<Action>().Spawn(direction,speed);
+        action.GetComponent<Action>().Spawn(direction, speed);
     }
 
     public void SetSpeed(float speed)

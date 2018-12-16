@@ -35,7 +35,7 @@ public class MasterSpawner : MonoBehaviour
     public int count;   //actual fire count
     public int fireCount; //count to win
     public float fireDelay;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,27 +51,31 @@ public class MasterSpawner : MonoBehaviour
         if (spawning)
         {
             float timeFrame = Time.deltaTime;
+
+            if (fireTimer > 0)
+            {
+                fireTimer -= timeFrame;
+                return;
+            }
+
             if (actionTimer <= 0)
             {
                 if (onFire)
-                { 
+                {
                     if (count < fireCount)
                     {
                         SpawnAction();
                         count++;
                     }
-                    else if (count == fireCount) {
+                    else if (count == fireCount)
+                    {
                         SpawnLastAction();
                         count++;
                         fireTimer = fireDelay;
                     }
-                    else if (fireTimer <= 0)
-                    {
-                        EndOnFire();
-                    }
                     else
                     {
-                        fireTimer -= timeFrame;
+                        this.gameObject.transform.parent.GetComponent<Player>().gc.CoolDown();
                     }
                 }
                 else if (fireIsOn)
@@ -89,16 +93,8 @@ public class MasterSpawner : MonoBehaviour
                 }
 
                 SetTimer();
-
-                if (fireTimer <= 0)
-                {
-                    onFire = false;
-                    fireIsOn = false;
-                    fireTimer = fireDelay;
-                }
-
             }
-            
+
             actionTimer -= timeFrame;
         }
     }
@@ -108,7 +104,8 @@ public class MasterSpawner : MonoBehaviour
         if (spawnInterval < spawnLimiter)
         {
             actionTimer = spawnLimiter;
-        } else
+        }
+        else
         {
             actionTimer = spawnInterval;
         }
@@ -120,17 +117,17 @@ public class MasterSpawner : MonoBehaviour
         comboLvL = comboLvl;
         this.speed = speed;
 
-        if (!onFire)
-        {
-            SetInterval();
-        }
+        SetInterval();
     }
 
     void SetInterval()
     {
-        spawnInterval = spawnBaseInterval - (comboLvL * comboMod) - (crowdLvL * crowdMod);
-        topSpawner.SetSpeed(speed);
-        bottomSpawner.SetSpeed(speed);
+        if (!onFire)
+        {
+            spawnInterval = spawnBaseInterval - (comboLvL * comboMod) - (crowdLvL * crowdMod);
+            topSpawner.SetSpeed(speed);
+            bottomSpawner.SetSpeed(speed);
+        }
     }
 
     public void OnFire(bool onFire)
@@ -138,8 +135,9 @@ public class MasterSpawner : MonoBehaviour
         if (onFire)
         {
             this.onFire = true;
-            spawnInterval += onFireMod;
-        } else
+            spawnInterval -= onFireMod;
+        }
+        else
         {
             fireIsOn = true;
         }
@@ -149,6 +147,7 @@ public class MasterSpawner : MonoBehaviour
     {
         onFire = false;
         fireIsOn = false;
+        count = 0;
 
         SetInterval();
     }
@@ -157,7 +156,6 @@ public class MasterSpawner : MonoBehaviour
     {
         topSpawner.SpawnRandomAction(false);
         bottomSpawner.SpawnRandomAction(false);
-        SetInterval();
     }
 
     void SpawnLastAction()
