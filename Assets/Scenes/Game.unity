@@ -2900,6 +2900,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7571576692938631317, guid: c97aba657f1acaf40a595838b84d87df,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.4640503
+      objectReference: {fileID: 0}
     - target: {fileID: 4226299310789046166, guid: c97aba657f1acaf40a595838b84d87df,
         type: 3}
       propertyPath: m_Text
@@ -3044,10 +3049,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 1.2000122
       objectReference: {fileID: 0}
-    - target: {fileID: 7571576692938631317, guid: c97aba657f1acaf40a595838b84d87df,
+    - target: {fileID: 7765650942670700884, guid: c97aba657f1acaf40a595838b84d87df,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -2.4640198
+      propertyPath: m_Text
+      value: "The Hackers:\r Jonas Schaltegger\r, Martin Proprentner\r, Isopp Alexander\n\r\nThe
+        DJ:\r\nChristof Karisch\r\n\r\nThe Moving Things:\r\nNatascha Rauscher\r\n\r\nThe
+        Creative Minds:\r\nJonas Schaltegger; Isopp Alexander; Natascha Rauscher"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765650942670700884, guid: c97aba657f1acaf40a595838b84d87df,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765650942670700884, guid: c97aba657f1acaf40a595838b84d87df,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8278856968101991623, guid: c97aba657f1acaf40a595838b84d87df, type: 3}
