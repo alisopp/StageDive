@@ -231,6 +231,8 @@ public class Player : MonoBehaviour
         }
 
         a.HitAction();
+
+        if (score > 1000) gc.EndGame();
     }
 
     public void MissHit(int points)
