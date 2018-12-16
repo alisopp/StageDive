@@ -95,10 +95,15 @@ public class GameController : MonoBehaviour
 
     void HandleCrowd(int pL, int pR)
     {
+
+        crowdScore = Mathf.Clamp((((float)(pR - pL)) / 100), -6, 6);
+        crowd.transform.position = new Vector2(Mathf.Clamp(crowdScore*2, -8, 8), crowd.transform.position.y);
+
         crowdScore = Mathf.Clamp((float)(pR - pL)/100,-6,6);
         crowd.transform.localPosition = new Vector2(Mathf.Clamp(crowdScore,-4,4), crowdYPosition);
         //crowdScore = Mathf.Clamp((((float)(pR - pL)) / 100), -6, 6);
         //crowd.transform.position = new Vector2(Mathf.Clamp(crowdScore*2, -10, 10), crowd.transform.position.y);
+
     }
 
     public void OnFire(Player player)
