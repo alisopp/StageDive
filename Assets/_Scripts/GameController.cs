@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public Player playerL;
     public Player playerR;
     public GameObject crowd;
+    public GameObject fireObject;
     public int crowdLvL = 0;
     public float crowdScore = 0;
     public bool topGood;
@@ -107,8 +108,8 @@ public class GameController : MonoBehaviour
     void HandleCrowd(int pL, int pR)
     {
 
-        crowdScore = Mathf.Clamp((((float)(pR - pL)) / 100), -6, 6);
-        crowd.transform.position = new Vector2(Mathf.Clamp(crowdScore*2, -8, 8), crowd.transform.position.y);
+        //crowdScore = Mathf.Clamp((((float)(pR - pL)) / 100), -6, 6);
+        //crowd.transform.position = new Vector2(Mathf.Clamp(crowdScore*2, -8, 8), crowd.transform.position.y);
 
         crowdScore = Mathf.Clamp((float)(pR - pL)/100,-6,6);
         crowd.transform.localPosition = new Vector2(Mathf.Clamp(crowdScore,-4,4), crowdYPosition);
@@ -123,6 +124,7 @@ public class GameController : MonoBehaviour
         {
             fire = false;
             onFire = true;
+            fireObject.SetActive(true);
             if (player == playerL)
             {
                 playerL.OnFire(true);
@@ -150,6 +152,7 @@ public class GameController : MonoBehaviour
 
     public void CoolDown()
     {
+        fireObject.SetActive(false);
         onFire = false;
         playerL.CoolDown();
         playerR.CoolDown();
