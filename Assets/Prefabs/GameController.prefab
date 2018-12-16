@@ -52,9 +52,9 @@ MonoBehaviour:
   bottomSpawner: {fileID: 3182195236558199705}
   spawnBaseInterval: 1
   comboLvL: 0
-  comboMod: 0.15
+  comboMod: 0.1
   crowdLvL: 0
-  crowdMod: 0.1
+  crowdMod: 0.05
   interactionInterval: 5
   onFire: 0
   fireIsOn: 0
@@ -114,14 +114,14 @@ MonoBehaviour:
   bottomSpawner: {fileID: 3182195236253739687}
   spawnBaseInterval: 1
   comboLvL: 0
-  comboMod: 0.15
+  comboMod: 0.1
   crowdLvL: 0
-  crowdMod: 0.1
+  crowdMod: 0.05
   interactionInterval: 5
   onFire: 0
   fireIsOn: 0
-  onFireMod: 0
-  count: 0
+  onFireMod: 0.1
+  count: 15
   fireCount: 30
   fireDelay: 2
 --- !u!1 &3182195236253739686
@@ -1445,6 +1445,7 @@ MonoBehaviour:
   playerL: {fileID: 3182195236900135676}
   playerR: {fileID: 3182195237373435396}
   crowd: {fileID: 3182195237855029614}
+  crowdLvL: 0
   crowdScore: 0
   interactor: {fileID: 0}
   minPlaytime: 120
@@ -1675,7 +1676,7 @@ MonoBehaviour:
   LEFT: 276
   RIGHT: 275
   DOWN: 274
-  COMBO: 303
+  COMBO: 307
   gc: {fileID: 3182195237303539148}
   ms: {fileID: 3182195236121645982}
   topTrigger: {fileID: 3182195236935650334}

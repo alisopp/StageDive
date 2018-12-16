@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     public float speed = 5;
     public int timeMod = 1;
     int missed = 0;
+    float fireTimer = 0;
+    public bool end = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,9 +34,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (end) return;
+
         if (Input.GetKeyDown(COMBO))
         {
-            if (!ms.onFire) gc.OnFire(this);
+            if (!ms.onFire && !ms.fireIsOn && fireTimer <= 0) gc.OnFire(this);
+            fireTimer = ms.fireDelay;
+        }
+
+        if (!ms.onFire && fireTimer > 0)
+        {
+            fireTimer -= Time.deltaTime;
         }
 
         GameObject top;
@@ -164,7 +174,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    comboLvL = comboLvL * 0.75f;
+                    comboLvL = comboLvL * 0.5f;
                     missed++;
                 }
             }
@@ -175,6 +185,8 @@ public class Player : MonoBehaviour
             }
             MissHit(2);
         }
+
+
         if (ms.comboLvL != (int)comboLvL)
         {
             UpdateLvLs(crowdLvL);
@@ -194,14 +206,14 @@ public class Player : MonoBehaviour
 
         if (a.onFireFinish)
         {
-            if (comboLvL > 2 && crowdLvL > 0)
+            if (comboLvL > 2 && crowdLvL > 2)
             {
                 gc.EndGame();
             } else if (comboLvL > 2)
             {
                 score += 200;
             }
-            gc.CoolDown(this);
+            gc.CoolDown();
         }
 
         a.HitAction();
@@ -217,9 +229,11 @@ public class Player : MonoBehaviour
 
         if (ms.onFire)
         {
-            gc.CoolDown(this);
-            if (crowdLvL > 0) score -= 100;
+            gc.CoolDown();
+            if (crowdLvL > 0) score -= 300;
         }
+
+        if (score < 0) score = 0;
     }
 
     public void InteractionTime()
@@ -232,19 +246,17 @@ public class Player : MonoBehaviour
         crowdLvL = crowdLvl;
         speed = 5 + ((crowdLvL + comboLvL)/2);
 
-        ms.speed = speed;
-        ms.comboLvL = (int)comboLvL;
-        ms.crowdLvL = crowdLvL;
+        ms.SetLevel(crowdLvL, (int)comboLvL, speed);
         SetSpeeds();
     }
 
     void SetSpeeds()
     {
-        foreach(Action a in ms.topSpawner.GetComponentsInChildren<Action>())
+        foreach(Action a in ms.topSpawner.transform.GetComponentsInChildren<Action>())
         {
             a.SetSpeed(speed);
         }
-        foreach (Action a in ms.bottomSpawner.GetComponentsInChildren<Action>())
+        foreach (Action a in ms.bottomSpawner.transform.GetComponentsInChildren<Action>())
         {
             a.SetSpeed(speed);
         }
