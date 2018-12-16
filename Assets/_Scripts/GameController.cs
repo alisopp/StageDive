@@ -39,6 +39,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && !running) StartGame();
+        if (Input.GetKeyDown(KeyCode.C) && !running) menuManager.SwitchMenu(3);
         if (Input.GetKeyDown(KeyCode.Space) && gamesEnd) ResetGame();
         if (!running) return;
 
