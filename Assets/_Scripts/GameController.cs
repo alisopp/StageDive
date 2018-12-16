@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+
     public Player playerL;
     public Player playerR;
     public GameObject crowd;
     public int crowdLvL = 0;
     public float crowdScore = 0;
-    public Object interactor;
     bool topGood;
     float gameTime = 0;
     public int minPlaytime;
@@ -18,14 +18,20 @@ public class GameController : MonoBehaviour
     public GameObject[] lights;
     public GameObject[] lightsL;
     public GameObject[] lightsR;
+    public MenuManager menuManager;
+    public InteractionHandler interactionHandler;
     bool fire = false;
     bool onFire = false;
     public bool running = false;
 
+
+    private float crowdYPosition;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        crowdYPosition = crowd.transform.localPosition.y;
+        interactionHandler.GameController = this;
     }
 
     // Update is called once per frame
@@ -74,6 +80,8 @@ public class GameController : MonoBehaviour
         playerR.end = false;
         playerL.ms.spawning = true;
         playerR.ms.spawning = true;
+        interactionHandler.StartInteractionHandler();
+        menuManager.SwitchMenu(2);
         running = true;
     }
 
@@ -87,8 +95,15 @@ public class GameController : MonoBehaviour
 
     void HandleCrowd(int pL, int pR)
     {
+
         crowdScore = Mathf.Clamp((((float)(pR - pL)) / 100), -6, 6);
         crowd.transform.position = new Vector2(Mathf.Clamp(crowdScore*2, -8, 8), crowd.transform.position.y);
+
+        crowdScore = Mathf.Clamp((float)(pR - pL)/100,-6,6);
+        crowd.transform.localPosition = new Vector2(Mathf.Clamp(crowdScore,-4,4), crowdYPosition);
+        //crowdScore = Mathf.Clamp((((float)(pR - pL)) / 100), -6, 6);
+        //crowd.transform.position = new Vector2(Mathf.Clamp(crowdScore*2, -10, 10), crowd.transform.position.y);
+
     }
 
     public void OnFire(Player player)
