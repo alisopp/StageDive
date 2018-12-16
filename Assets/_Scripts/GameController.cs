@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
     public Player playerL;
     public Player playerR;
     public GameObject crowd;
-    int crowdLvL = 0;
+    public int crowdLvL = 0;
     public float crowdScore = 0;
     bool topGood;
     float gameTime = 0;
@@ -42,8 +42,8 @@ public class GameController : MonoBehaviour
         if (crowdLvL != (int)crowdScore)
         {
             crowdLvL = (int)crowdScore;
-            playerL.UpdateLvLs(Mathf.Max(Mathf.Min(-crowdLvL, 0),-5));
-            playerR.UpdateLvLs(Mathf.Min(Mathf.Max(crowdLvL, 0),5));
+            playerL.UpdateLvLs(-Mathf.Min(crowdLvL, 0));
+            playerR.UpdateLvLs(Mathf.Max(crowdLvL, 0));
         }
 
         if (Mathf.Abs(crowdScore) >= 5 && !fire && !onFire)
@@ -53,7 +53,7 @@ public class GameController : MonoBehaviour
             {
                 go.SetActive(true);
             }
-        } else if (Mathf.Abs(crowdScore) < 5 && fire)
+        } else if (Mathf.Abs(crowdScore) < 5)
         {
             fire = false;
             foreach (GameObject go in lights)
@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
         gameTime += Time.deltaTime;
         if (minPlaytime < gameTime)
         {
-            int timeMod = Mathf.Min((int)gameTime - minPlaytime / timeModInterval, maxTimeMod);
+            int timeMod = 1 + Mathf.Min((int)gameTime - minPlaytime / timeModInterval, maxTimeMod);
             playerL.timeMod = timeMod;
             playerR.timeMod = timeMod;
         }
@@ -73,6 +73,8 @@ public class GameController : MonoBehaviour
 
     void StartGame()
     {
+        playerL.end = false;
+        playerR.end = false;
         playerL.ms.spawning = true;
         playerR.ms.spawning = true;
         interactionHandler.StartInteractionHandler();
@@ -81,14 +83,16 @@ public class GameController : MonoBehaviour
 
     public void EndGame()
     {
+        playerL.end = true;
         playerL.ms.spawning = false;
+        playerR.end = true;
         playerR.ms.spawning = false;
     }
 
     void HandleCrowd(int pL, int pR)
     {
         crowdScore = Mathf.Clamp((float)(pR - pL)/100,-6,6);
-        crowd.transform.localPosition = new Vector2(Mathf.Clamp(crowdScore,-4,4), crowdYPosition);
+        crowd.transform.position = new Vector2(Mathf.Clamp(crowdScore,-4,4), crowd.transform.position.y);
     }
 
     public void OnFire(Player player)
@@ -122,24 +126,20 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void CoolDown(Player player)
+    public void CoolDown()
     {
-        if (playerL == player)
+        onFire = false;
+        playerL.CoolDown();
+        playerR.CoolDown();
+
+        foreach (GameObject go in lightsL)
         {
-            onFire = false;
-            foreach (GameObject go in lightsL)
-            {
-                go.SetActive(false);
-            }
-            playerR.CoolDown();
-        } else
+            go.SetActive(false);
+        }
+        
+        foreach (GameObject go in lightsR)
         {
-            onFire = false;
-            foreach (GameObject go in lightsL)
-            {
-                go.SetActive(false);
-            }
-            playerL.CoolDown();
+            go.SetActive(false);
         }
     }
 

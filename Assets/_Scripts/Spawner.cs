@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
         {
             mod = 0;
         }
-        if (Random.Range(0, 100) + mod > spawnChance)
+        if (Random.Range(0, 100) + mod > spawnChance || end)
         {
             int index = Random.Range(0, actions.Length);
             GameObject action = Instantiate(actions[index], spawnpoint);
