@@ -20,22 +20,19 @@ public class GameController : MonoBehaviour
     public GameObject[] lightsR;
     bool fire = false;
     bool onFire = false;
-    public Sprite[] crowdSprites;
-    bool running = false;
+    public bool running = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) StartGame();
+        if (Input.GetKeyDown(KeyCode.Space) && !running) StartGame();
         if (!running) return;
-
-        crowd.GetComponent<SpriteRenderer>().sprite = crowdSprites[(int)gameTime % 4];
 
         HandleCrowd(playerL.score, playerR.score);
         if (crowdLvL != (int)crowdScore)
@@ -47,12 +44,13 @@ public class GameController : MonoBehaviour
 
         if (Mathf.Abs(crowdScore) >= 5 && !fire && !onFire)
         {
-           fire = true;
-           foreach (GameObject go in lights)
+            fire = true;
+            foreach (GameObject go in lights)
             {
                 go.SetActive(true);
             }
-        } else if (Mathf.Abs(crowdScore) < 5)
+        }
+        else if (Mathf.Abs(crowdScore) < 5)
         {
             fire = false;
             foreach (GameObject go in lights)
@@ -89,8 +87,8 @@ public class GameController : MonoBehaviour
 
     void HandleCrowd(int pL, int pR)
     {
-        crowdScore = Mathf.Clamp((((float)(pR - pL))/100),-6,6);
-        crowd.transform.position = new Vector2(Mathf.Clamp(crowdScore,-5,5), -7);
+        crowdScore = Mathf.Clamp((((float)(pR - pL)) / 100), -6, 6);
+        crowd.transform.position = new Vector2(Mathf.Clamp(crowdScore*2, -10, 10), crowd.transform.position.y);
     }
 
     public void OnFire(Player player)
@@ -134,7 +132,7 @@ public class GameController : MonoBehaviour
         {
             go.SetActive(false);
         }
-        
+
         foreach (GameObject go in lightsR)
         {
             go.SetActive(false);

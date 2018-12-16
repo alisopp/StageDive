@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -198,7 +198,7 @@ public class Player : MonoBehaviour
         Action a = action.GetComponent<Action>();
         int points = 1;
         if (a.perfect) points += points;
-        points *= (1+(int)comboLvL);
+        points *= (1 + (int)comboLvL);
 
         points *= timeMod;
 
@@ -209,7 +209,8 @@ public class Player : MonoBehaviour
             if (comboLvL > 2 && crowdLvL > 2)
             {
                 gc.EndGame();
-            } else if (comboLvL > 2)
+            }
+            else if (comboLvL > 2)
             {
                 score += 200;
             }
@@ -221,7 +222,7 @@ public class Player : MonoBehaviour
 
     public void MissHit(int points)
     {
-        points = points * (1+(int)comboLvL);
+        points = points * (1 + (int)comboLvL);
 
         points *= timeMod;
 
@@ -244,7 +245,7 @@ public class Player : MonoBehaviour
     public void UpdateLvLs(int crowdLvl)
     {
         crowdLvL = crowdLvl;
-        speed = 5 + ((crowdLvL + comboLvL)/2);
+        speed = 5 + ((crowdLvL + comboLvL) / 2);
 
         ms.SetLevel(crowdLvL, (int)comboLvL, speed);
         SetSpeeds();
@@ -252,7 +253,7 @@ public class Player : MonoBehaviour
 
     void SetSpeeds()
     {
-        foreach(Action a in ms.topSpawner.transform.GetComponentsInChildren<Action>())
+        foreach (Action a in ms.topSpawner.transform.GetComponentsInChildren<Action>())
         {
             a.SetSpeed(speed);
         }
