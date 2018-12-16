@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
     public GameObject[] lightsR;
     bool fire = false;
     bool onFire = false;
+    public Sprite[] crowdSprites;
+    bool running = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,9 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) StartGame();
+        if (!running) return;
+
+        crowd.GetComponent<SpriteRenderer>().sprite = crowdSprites[(int)gameTime % 4];
 
         HandleCrowd(playerL.score, playerR.score);
         if (crowdLvL != (int)crowdScore)
@@ -71,6 +76,7 @@ public class GameController : MonoBehaviour
         playerR.end = false;
         playerL.ms.spawning = true;
         playerR.ms.spawning = true;
+        running = true;
     }
 
     public void EndGame()
@@ -84,7 +90,7 @@ public class GameController : MonoBehaviour
     void HandleCrowd(int pL, int pR)
     {
         crowdScore = Mathf.Clamp((((float)(pR - pL))/100),-6,6);
-        crowd.transform.position = new Vector2(Mathf.Clamp(crowdScore,-4,4), crowd.transform.position.y);
+        crowd.transform.position = new Vector2(Mathf.Clamp(crowdScore,-5,5), -7);
     }
 
     public void OnFire(Player player)

@@ -1058,6 +1058,7 @@ MonoBehaviour:
   crowdLvL: 0
   speed: 5
   timeMod: 1
+  end: 0
 --- !u!1 &3182195236935650333
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,6 +1462,7 @@ MonoBehaviour:
   lightsR:
   - {fileID: 3182195237673240596}
   - {fileID: 3182195237957613983}
+  crowdSprites: []
 --- !u!1 &3182195237334822769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,6 +1688,7 @@ MonoBehaviour:
   crowdLvL: 0
   speed: 5
   timeMod: 1
+  end: 0
 --- !u!1 &3182195237673240596
 GameObject:
   m_ObjectHideFlags: 0
