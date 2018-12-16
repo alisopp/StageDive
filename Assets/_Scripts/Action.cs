@@ -58,7 +58,7 @@ public class Action : MonoBehaviour
         {
             if (collision.gameObject.tag.Equals("Trigger"))
             {
-                ChangeRender(0);
+                ChangeRender(5);
                 destroyMe = true;
                 GetComponent<Rigidbody2D>().gravityScale = Random.Range(1.5f, 3);
                 transform.parent.transform.parent.transform.parent.GetComponent<Player>().MissHit(1);
@@ -98,7 +98,8 @@ public class Action : MonoBehaviour
 
     public void HitAction()
     {
-        ChangeRender(1);
+        if (perfect) ChangeRender(4);
+        else ChangeRender(3);
         destroyMe = true;
         Destroy(GetComponent<Collider2D>());
         GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);

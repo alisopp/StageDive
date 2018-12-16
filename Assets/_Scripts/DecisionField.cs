@@ -20,7 +20,7 @@ public class DecisionField : MonoBehaviour
 
     public IEnumerator StayOnBoard()
     {
-        yield return new WaitForSeconds(InteractionHandler.GetInstance().DecisionFieldAliveTime);
+        yield return new WaitForSeconds(InteractionHandler.GetInstance().DecisionFieldAliveTime+3);
         // Todo Play Animation or just deactivate field;
         gameObject.SetActive(false);
     }

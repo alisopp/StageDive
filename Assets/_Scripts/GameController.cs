@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     public GameObject crowd;
     public int crowdLvL = 0;
     public float crowdScore = 0;
-    bool topGood;
+    public bool topGood;
     float gameTime = 0;
     public int minPlaytime;
     public int timeModInterval;

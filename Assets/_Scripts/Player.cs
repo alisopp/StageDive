@@ -217,12 +217,25 @@ public class Player : MonoBehaviour
             gc.CoolDown();
         }
 
+        if (a.interaction)
+        {
+            bool top = a.transform.parent.tag.Equals("Top");
+            if (top == gc.topGood)
+            {
+                score += 50;
+            }
+            else
+            {
+                score -= 50;
+            }
+        }
+
         a.HitAction();
     }
 
     public void MissHit(int points)
     {
-        points = points * (1 + (int)comboLvL);
+        points = points * (1 + Mathf.Abs((int)comboLvL));
 
         points *= timeMod;
 
