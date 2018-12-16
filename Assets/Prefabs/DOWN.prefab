@@ -186,10 +186,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d7e84ce8fbb146840b317128dc9947f2, type: 3}
   - {fileID: 21300000, guid: fc297bce2d6ec894aa6c5401bf1b05e9, type: 3}
   - {fileID: 21300000, guid: c7b6fb2e4022c2440a812c4dbe525779, type: 3}
+  - {fileID: 21300000, guid: 43c71f469934eaa4ebd9da9d4356eaf7, type: 3}
+  - {fileID: 21300000, guid: c69a1caaaa1b0d042812ba98752e1aba, type: 3}
+  - {fileID: 21300000, guid: b99f5276b6ef39e408203c06b82e8e05, type: 3}
   interactSprite:
-  - {fileID: 21300000, guid: 1e9f053303e7ef24e9790c99c09cc049, type: 3}
-  - {fileID: 21300000, guid: 1e9f053303e7ef24e9790c99c09cc049, type: 3}
-  - {fileID: 21300000, guid: 7cb7d73b9b333d34da639cceef3d71fe, type: 3}
+  - {fileID: 21300000, guid: 110f8bfa0b9a6df49b4d121cdad4876d, type: 3}
+  - {fileID: 21300000, guid: 942bdf6186f20674c926b87b79e69ace, type: 3}
+  - {fileID: 21300000, guid: 0d40071225f5ca04ba36fdc70223c696, type: 3}
+  - {fileID: 21300000, guid: 2a815267da361e942a528c6d04b8166e, type: 3}
+  - {fileID: 21300000, guid: a3df137ec9f56374e873da16ad8bc61c, type: 3}
+  - {fileID: 21300000, guid: c9765abf475657947b208664348e74ba, type: 3}
 --- !u!58 &1321989679755231174
 CircleCollider2D:
   m_ObjectHideFlags: 0

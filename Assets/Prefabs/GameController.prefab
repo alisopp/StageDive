@@ -82,9 +82,9 @@ MonoBehaviour:
   bottomSpawner: {fileID: 3182195236558199705}
   spawnBaseInterval: 1
   comboLvL: 0
-  comboMod: 0.15
+  comboMod: 0.1
   crowdLvL: 0
-  crowdMod: 0.1
+  crowdMod: 0.05
   interactionInterval: 5
   onFire: 0
   fireIsOn: 0
@@ -142,14 +142,14 @@ MonoBehaviour:
   bottomSpawner: {fileID: 3182195236253739687}
   spawnBaseInterval: 1
   comboLvL: 0
-  comboMod: 0.15
+  comboMod: 0.1
   crowdLvL: 0
-  crowdMod: 0.1
+  crowdMod: 0.05
   interactionInterval: 5
   onFire: 0
   fireIsOn: 0
-  onFireMod: 0
-  count: 0
+  onFireMod: 0.1
+  count: 15
   fireCount: 30
   fireDelay: 2
 --- !u!1 &3182195236253739686
@@ -986,17 +986,33 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d8e2eb32a86540d4fa18e5efa18031ed, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 2.78, y: 6.63}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+--- !u!114 &3182195236900135676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3182195236900135671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa9c6b4f142fb14c911b84bec8bc599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UP: 119
+  LEFT: 97
+  RIGHT: 100
+  DOWN: 115
+  COMBO: 304
+  gc: {fileID: 3182195237303539148}
+  ms: {fileID: 3182195236214829607}
+  topTrigger: {fileID: 3182195237334822774}
+  bottomTrigger: {fileID: 3182195236486392018}
+  score: 0
+  comboLvL: 0
+  crowdLvL: 0
+  speed: 5
+  timeMod: 1
+  end: 0
 --- !u!1 &3182195236935650333
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,6 +1307,7 @@ MonoBehaviour:
   playerL: {fileID: 3182195236900135676}
   playerR: {fileID: 3182195237373435396}
   crowd: {fileID: 3182195237855029614}
+  crowdLvL: 0
   crowdScore: 0
   minPlaytime: 120
   timeModInterval: 30
@@ -1305,8 +1322,7 @@ MonoBehaviour:
   lightsR:
   - {fileID: 3182195237673240596}
   - {fileID: 3182195237957613983}
-  menuManager: {fileID: 0}
-  interactionHandler: {fileID: 0}
+  crowdSprites: []
 --- !u!1 &3182195237334822769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,17 +1539,33 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d8e2eb32a86540d4fa18e5efa18031ed, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 2.78, y: 6.63}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+--- !u!114 &3182195237373435396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3182195237373435395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa9c6b4f142fb14c911b84bec8bc599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UP: 273
+  LEFT: 276
+  RIGHT: 275
+  DOWN: 274
+  COMBO: 307
+  gc: {fileID: 3182195237303539148}
+  ms: {fileID: 3182195236121645982}
+  topTrigger: {fileID: 3182195236935650334}
+  bottomTrigger: {fileID: 3182195236495408234}
+  score: 0
+  comboLvL: 0
+  crowdLvL: 0
+  speed: 5
+  timeMod: 1
+  end: 0
 --- !u!1 &3182195237673240596
 GameObject:
   m_ObjectHideFlags: 0
